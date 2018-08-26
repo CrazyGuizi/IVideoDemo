@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="panel_widget_size">32dp</dimen>
+    <dimen name="video_title_size">18sp</dimen>
+    <dimen name="seek_bar_thumb__normal_size">16</dimen>
+    <dimen name="seek_bar_thumb__pressed_size">24</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_2">2dp</dimen>
+    <dimen name="divider">1dp</dimen>
+</resources>

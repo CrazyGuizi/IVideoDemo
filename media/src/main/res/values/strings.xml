@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">media</string>
+    <string name="wifi_disconnection_warn">当前不处于Wifi状态下，是否使用流量播放</string>
+    <string name="no_net_warn">网络连接出错惹~~~</string>
+    <string name="error">无法播放</string>
 </resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:id="@+id/ll_connection_warn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_connection_state_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/wifi_disconnection_warn"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_keep_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="继续"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_panel_back"
+        android:layout_width="@dimen/panel_widget_size"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/video_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_video_title"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_video_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginRight="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/video_title_size"
+        app:layout_constraintLeft_toRightOf="@id/iv_panel_back"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="功夫"
+        />
+
+    <ImageView
+        android:id="@+id/iv_video_expand"
+        android:layout_width="@dimen/panel_widget_size"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginRight="@dimen/margin_8"
+        android:background="@drawable/video_expand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginRight="@dimen/margin_8"/>
+
+
+    <ImageView
+        android:id="@+id/iv_video_play_state"
+        android:layout_width="@dimen/panel_widget_size"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:background="@drawable/video_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_video_position"/>
+
+
+    <TextView
+        android:id="@+id/tv_video_position"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginLeft="@dimen/margin_4"
+        android:gravity="center_vertical"
+        android:text="00:00:00"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/iv_video_play_state"
+        app:layout_constraintRight_toLeftOf="@id/seek_bar_video_seek"/>
+
+
+    <SeekBar
+        android:id="@+id/seek_bar_video_seek"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginLeft="@dimen/margin_4"
+        android:maxHeight="@dimen/margin_4"
+        android:minHeight="@dimen/margin_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_video_position"
+        app:layout_constraintRight_toLeftOf="@id/video_duration"/>
+
+    <TextView
+        android:id="@+id/video_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/panel_widget_size"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginLeft="@dimen/margin_4"
+        android:layout_marginRight="@dimen/margin_8"
+        android:gravity="center_vertical"
+        android:text="00:00:00"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/seek_bar_video_seek"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_panel_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightpink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
+

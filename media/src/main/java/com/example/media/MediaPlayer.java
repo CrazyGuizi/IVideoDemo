@@ -129,6 +129,11 @@ public class MediaPlayer extends AbsMediaPlayer implements android.media.MediaPl
     }
 
     @Override
+    public void reset() {
+        mMediaPlayer.reset();
+    }
+
+    @Override
     public boolean isPlaying() {
         if (mMediaPlayer != null) {
             return mMediaPlayer.isPlaying();

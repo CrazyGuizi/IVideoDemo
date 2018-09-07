@@ -30,6 +30,11 @@ public abstract class AbsMediaPlayer {
     // 停止
     public abstract void stop();
 
+    // 重置
+    public abstract void reset();
+
+
+
     public abstract boolean isPlaying();
     // 指定到
     public abstract void seekTo(long position);

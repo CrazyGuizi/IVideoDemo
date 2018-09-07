@@ -1,19 +1,16 @@
 package com.example.media;
 
 import android.graphics.SurfaceTexture;
+import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 
-import com.example.media.abs.AbsControlPanel;
 import com.example.media.abs.AbsMediaPlayer;
 import com.example.media.utils.LogUtil;
 import com.example.media.view.ResizeTextureView;
 import com.example.media.view.VideoView;
 import com.example.media.view.WindowType;
 
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,6 +26,7 @@ public class MediaPlayerManager implements TextureView.SurfaceTextureListener {
     private PlayerState mPlayerState;
     private WindowType mWindowType = WindowType.NORMAL;
 
+    private Object mOldData = null;
     private VideoView mVideoView;
     private ResizeTextureView mTextureView;
     //    private SurfaceTexture mSurfaceTexture;
@@ -55,21 +53,26 @@ public class MediaPlayerManager implements TextureView.SurfaceTextureListener {
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+        LogUtil.d(TAG, "onSurfaceTextureAvailable");
         if (mMediaPlayer != null) {
-            mMediaPlayer.setDataSource(mVideoView.getDataSource());
-            if (mPlayerState != PlayerState.PAUSE) {
-                mMediaPlayer.prepareAsync();
-                LogUtil.d(TAG, "准备");
+            if (mOldData != mVideoView.getDataSource())
+                mMediaPlayer.setDataSource(mVideoView.getDataSource());
+                if (mPlayerState != PlayerState.PAUSE) {
+                    mMediaPlayer.prepareAsync();
+                    LogUtil.d(TAG, "准备");
+                } else
+                    start();
+                if (mSurface == null)
+                    createSurface();
+                mMediaPlayer.setSurface(mSurface);
+                mOldData = mVideoView.getDataSource();
             }
-            backgroundToForeground();
-            LogUtil.d(TAG, "" + mSurface);
-            mMediaPlayer.setSurface(mSurface);
-        }
     }
 
-    public void backgroundToForeground() {
+    public void createSurface() {
         if (mSurface == null && mTextureView != null) {
             mSurface = new Surface(mTextureView.getSurfaceTexture());
+            LogUtil.d(TAG, "创建mSurface");
         }
     }
 
@@ -81,7 +84,8 @@ public class MediaPlayerManager implements TextureView.SurfaceTextureListener {
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         LogUtil.d(TAG, "method is invoked: onSurfaceTextureDestroyed");
-        return false;
+        mSurface = null;
+        return true;
     }
 
     @Override
@@ -90,12 +94,35 @@ public class MediaPlayerManager implements TextureView.SurfaceTextureListener {
     }
 
     public void init(VideoView videoView) {
+        LogUtil.d(TAG, "init");
         if (mMediaPlayer == null) {
             mMediaPlayer = new MediaPlayer();
         }
+
         mVideoView = videoView;
         mTextureView = videoView.getVideo();
         mTextureView.setSurfaceTextureListener(this);
+    }
+
+    public void changeDataSource(Object object) {
+        if (mVideoView != null) {
+            mMediaPlayer.reset();
+            mVideoView.setDataSource(object);
+            if (mMediaPlayer != null) {
+                if (mOldData != mVideoView.getDataSource())
+                    mMediaPlayer.setDataSource(mVideoView.getDataSource());
+                if (mPlayerState != PlayerState.PAUSE) {
+                    mMediaPlayer.prepareAsync();
+                    LogUtil.d(TAG, "准备");
+                } else
+                    start();
+                if (mSurface == null)
+                    createSurface();
+                mMediaPlayer.setSurface(mSurface);
+                mOldData = mVideoView.getDataSource();
+            }
+
+        }
     }
 
     // 暂停
@@ -221,6 +248,8 @@ public class MediaPlayerManager implements TextureView.SurfaceTextureListener {
             mSurface.release();
             mSurface = null;
         }
+
+        mOldData = null;
     }
 
     class UpdateProgressTask extends TimerTask {
